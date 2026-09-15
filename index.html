@@ -1,12 +1,11 @@
 ---
-layout: default
 ---
 
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>我的博客</title>
 </head>
 
@@ -16,21 +15,25 @@ layout: default
 
 <p>Hello 大家好</p>
 <p>我是ydx，这是我的个人网站。</p>
-<p>很高兴你来到这里，你可以在以下的网站找到我</p>
+<p>很高兴你来到这里，你可以在以下的网站找到我：</p>
 
 <ul>
-  <li><a href="https://xxxxxxxs1.github.io">Github</a></li>
+  <li>
+    <a href="https://xxxxxxxs1.github.io">Github</a>
+  </li>
 </ul>
 
 <h2>文章</h2>
 
 <ul>
-    {% for post in site.posts %}
-    <li>
-        <a href="{{ post.url }}">{{ post.title }}</a>
-        <small>{{ post.date | date: "%Y-%m-%d" }}</small>
-    </li>
-    {% endfor %}
+{% for post in site.posts %}
+  <li>
+    <a href="{{ post.url | relative_url }}">
+      {{ post.title }}
+    </a>
+    {{ post.date | date: "%Y-%m-%d" }}
+  </li>
+{% endfor %}
 </ul>
 
 </body>
