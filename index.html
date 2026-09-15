@@ -6,35 +6,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我的博客</title>
+
+  <title>{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 
 <body>
 
-<h1>我的博客</h1>
+<header class="site-header">
+  <div class="container">
 
-<p>Hello 大家好</p>
-<p>我是ydx，这是我的个人网站。</p>
-<p>很高兴你来到这里，你可以在以下的网站找到我：</p>
+    <div class="site-title">
+      <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    </div>
 
-<ul>
-  <li>
-    <a href="https://xxxxxxxs1.github.io">Github</a>
-  </li>
-</ul>
+    <div class="site-description">
+      {{ site.description }}
+    </div>
 
-<h2>文章</h2>
+    <nav class="site-nav">
+      <a href="{{ '/' | relative_url }}">首页</a>
+      <a href="{{ '/archives/' | relative_url }}">文章列表</a>
+      <a href="{{ '/about/' | relative_url }}">关于</a>
+      <a href="https://github.com/xxxxxxxs1">Github</a>
+    </nav>
 
-<ul>
-{% for post in site.posts %}
-  <li>
-    <a href="{{ post.url | relative_url }}">
-      {{ post.title }}
-    </a>
-    {{ post.date | date: "%Y-%m-%d" }}
-  </li>
-{% endfor %}
-</ul>
+  </div>
+</header>
+
+
+<main class="container main-content">
+
+  <section class="posts">
+
+    <div class="section-title">
+      最新文章
+    </div>
+
+    {% for post in site.posts %}
+
+    <article class="post-preview">
+
+      <div class="post-meta">
+
+        <span>
+          {{ post.date | date: "%Y-%m-%d" }}
+        </span>
+
+        {% if post.categories %}
+        <span class="category">
+          {{ post.categories }}
+        </span>
+        {% endif %}
+
+      </div>
+
+      <h2>
+        <a href="{{ post.url | relative_url }}">
+          {{ post.title }}
+        </a>
+      </h2>
+
+      <p class="excerpt">
+        {% if post.excerpt %}
+          {{ post.excerpt | strip_html | truncate: 180 }}
+        {% endif %}
+      </p>
+
+      <a class="read-more" href="{{ post.url | relative_url }}">
+        阅读更多 →
+      </a>
+
+    </article>
+
+    {% endfor %}
+
+  </section>
+
+</main>
+
+
+<footer class="site-footer">
+  <div class="container">
+    © {{ site.time | date: "%Y" }} ydx
+  </div>
+</footer>
 
 </body>
 </html>
